@@ -1,35 +1,36 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Main
 {
 
-
     public static void main(String[] args) throws FileNotFoundException
     {
-        printPartOfWord("københavn",6,4);
+
+        printIfPalidrome(" den laks skal ned");
 
 
     }
 
-    private static void printPartOfWord(String ordet, int index, int length)
+    private static void printIfPalidrome(String bagfra)
     {
-        try
-        {
-            System.out.println(ordet.substring(index,index+length));
-        }
-        catch(StringIndexOutOfBoundsException e)
-        {
-            if (index < ordet.length())
-            {
-                System.out.println(ordet.substring(index));
+        String clean = bagfra.replaceAll("\\s+", "").toLowerCase();
+        int length = clean.length();
+        int forward = 0;
+        int backward = length - 1;
+        while (backward > forward) {
+            char forwardChar = clean.charAt(forward++);
+            char backwardChar = clean.charAt(backward++);
+            if (forwardChar != backwardChar) {
+                System.out.println("failed");
+            } else {
+                System.out.println(bagfra);
             }
+        }
 
-            if (index > ordet.length())
-            {
-                System.out.println("failed!");
-            }
-        }
+
     }
 }
+
